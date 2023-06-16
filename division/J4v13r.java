@@ -1,4 +1,4 @@
-public class NoDivision {
+public class Javier {
     
     public static void main(String[] args) {
        
