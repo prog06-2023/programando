@@ -17,6 +17,8 @@ public class Javier {
             }
         System.out.println(mayor);
         
-        
+        scanner.close();
     }
+
+}
     

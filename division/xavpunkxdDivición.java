@@ -1,6 +1,6 @@
 public class xavpunkxdDivición {
      public static void main(String[] args){
-        int dividendo = 10;
+        int dividendo = 13;
         int resultado=0;
         int contador= 0;
 
