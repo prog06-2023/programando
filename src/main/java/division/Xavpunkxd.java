@@ -2,15 +2,19 @@ package division;
 
 public class Xavpunkxd {
      public static void main(String[] args){
-        int dividendo = 10;
-        int resultado=0;
-        int contador= 0;
+        double dividendo = 10;
+        double resultado=0;
+        double contador= 0;
 
         while (resultado < dividendo){
             resultado = (2*contador);
             contador++;            
         }
 
-        System.out.print(contador-1);
+         if (resultado != dividendo){
+                 System.out.println("el resultado de la divicion es impar por lo que  incluye decimales");
+             }else{
+                 System.out.print(contador-1);
+             }
      }
 }
