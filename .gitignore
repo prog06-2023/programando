@@ -1,3 +1,4 @@
-/out
-programando.iml
+.gradle
 .idea
+/build
+/gradle
