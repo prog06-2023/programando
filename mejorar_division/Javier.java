@@ -3,7 +3,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class DivisionMejorada {
+public class Javier {
     public static void main(String[] args) {
        
             Scanner scanner = new Scanner(System.in);
