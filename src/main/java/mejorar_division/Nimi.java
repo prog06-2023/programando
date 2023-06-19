@@ -9,8 +9,8 @@ class Nimi {
 
         int dividendo = 0;
         int divisor = 0;
-        int cociente = 0;
-        int resto = 0;
+        int cociente;
+        int resto;
 
         boolean reintentar = true;
         while (reintentar){
