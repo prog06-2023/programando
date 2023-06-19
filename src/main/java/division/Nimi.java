@@ -18,9 +18,6 @@ class Nimi {
         
         scanner.close();
 
-        System.out.println(nro1);
-        System.out.println(nro2);
-
         int resultado = 0;
         while (nro1 >= nro2) {
             nro1 = nro1 - nro2;
