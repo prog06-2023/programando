@@ -24,6 +24,11 @@ public class Javier {
                 System.out.println("Por Favor ingrese el nro. divisor: ");
                 divisor = scanner.nextInt();
 
+                if (divisor == 0){
+                    System.out.println("No se puede dividir por cero");
+                    return;
+                } 
+                
                 while (dividendo >= divisor) {
                     dividendo = dividendo - divisor;
                     resto = dividendo;
