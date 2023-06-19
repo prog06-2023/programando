@@ -4,32 +4,50 @@ import java.util.Scanner;
 
 class Nimi {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int nro1;
-        int copyNro1;
-        int nro2;
+        int nro1 = 0;
+        int nro2 = 0;
 
-        System.out.print("Ingrese el número que desea dividir: ");
-        nro1 = scanner.nextInt();
-        copyNro1 = nro1;
+        int dividendo = 0;
+        int divisor = 0;
+        int cociente = 0;
+        int resto = 0;
 
-        System.out.print("Ingrese por cuanto desea dividirlo: ");
-        nro2 = scanner.nextInt();
-        
-        scanner.close();
+        boolean reintentar = true;
+        while (reintentar){
+            try {
+                Scanner scanner = new Scanner(System.in);
 
-        System.out.println(nro1);
-        System.out.println(nro2);
+                System.out.print("Ingrese el número que desea dividir: ");
+                nro1 = scanner.nextInt();
 
-        int resultado = 0;
-        while (nro1 >= nro2) {
-            nro1 = nro1 - nro2;
-            resultado++;
+                System.out.print("Ingrese por cuanto desea dividirlo: ");
+                nro2 = scanner.nextInt();
+
+                scanner.close();
+
+                dividendo = nro1;
+                divisor = nro2;
+
+                reintentar = false;
+            }catch (Exception e){
+                System.out.print("Solo se pueden dividir numeros");
+            }
         }
 
-        int resto = nro1;
+        if (divisor == 0){
+            System.out.print("No se puede dividir entre cero");
+            return;
+        }
 
-        System.out.println("El resultado de " + copyNro1 + "/" + nro2 + " es: " + resultado + ". El resto: " + resto);
+        cociente = 0;
+        while (dividendo >= divisor) {
+            dividendo = dividendo - divisor;
+            cociente++;
+        }
+
+        resto = dividendo;
+
+        System.out.println(nro1 + "/" + nro2 + " = " + cociente + ". El resto: " + resto);
 
     }
 }
