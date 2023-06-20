@@ -10,12 +10,12 @@ public class Javier {
         System.out.println("Cuantos numeros vamos a comparar?: ");
         int nroDeVeces = teclado.nextInt();
         int iteraciones = 0;
-        int mayor = 0;
+        int mayor = Integer.MIN_VALUE;
 
         while (iteraciones < nroDeVeces) {
             System.out.println("Agregue un numero para comparar: ");
             int nroIngresado = teclado.nextInt();
-
+            
             if (nroIngresado > mayor) {
                 mayor = nroIngresado;
             }
