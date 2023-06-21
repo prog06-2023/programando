@@ -2,7 +2,7 @@ package mejora_de_la_divicion;
 
 import java.util.Scanner;
 
-public class MejoradeDivicionXavi {
+public class Xavpunkxd {
      /**
      * @param args
      */
