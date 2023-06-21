@@ -30,9 +30,9 @@ public class Xavpunkxd {
 
             if(resultado != numero){
                 resto = resultado - numero;
-                System.out.print("el resto de esta diviciÓn es: "+ resto);    
+                System.out.print("el resultado de la divición es: "+(contador-1)+"y me sobra: "+ resto);    
             }else{
-                System.out.print(contador-1);
+                System.out.print("el resultado de la divición es: "+(contador-1)+"y me sobra: "+ resto);
             }
 
             
