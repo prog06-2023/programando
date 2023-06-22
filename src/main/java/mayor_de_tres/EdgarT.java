@@ -15,13 +15,14 @@ public class EdgarT {
 
         if (num1>num2){
             mayor = num1;
-        }else if (num2>num3){
-            mayor = num2;
         }else{
-            mayor =  num3;
+            mayor = num2;
+        }
+        if (num3>num2){
+            mayor = num3;
         }
 
-        if ((num3==num1) & (num2==num3)){
+        if ((num3==num1) && (num2==num3)){
             System.out.println("Todos los numeros son iguales");
         }else{
             System.out.println("mayor = " + mayor);
