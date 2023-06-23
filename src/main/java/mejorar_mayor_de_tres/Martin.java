@@ -1,3 +1,5 @@
+package src.main.java.mejorar_mayor_de_tres;
+
 import java.util.Scanner;
 
 public class Martin {
