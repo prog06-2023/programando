@@ -2,23 +2,26 @@ package mejorar_mayor_de_tres;
 
 import java.util.Scanner;
 
-class Nimi {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+public class Javier {
 
-        System.out.println("Ingrese cantidad de numeros a comparar");
-        int cantidad = scanner.nextInt();
+    public static void main(String[] args) {
+
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Cuantos numeros vamos a comparar?: ");
+        int nroDeVeces = teclado.nextInt();
+        int iteraciones = 0;
         int mayor = Integer.MIN_VALUE;
 
-        while (cantidad != 0) {
+        while (iteraciones < nroDeVeces) {
             System.out.println("Agregue un numero para comparar: ");
-            int nroIngresado = scanner.nextInt();
-
+            int nroIngresado = teclado.nextInt();
+            
             if (nroIngresado > mayor) {
                 mayor = nroIngresado;
             }
 
-            cantidad--;
+            iteraciones++;
+
         }
         System.out.println("El mayor de todos los nros. ingresados es: " + mayor);
 
