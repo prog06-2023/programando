@@ -1,4 +1,4 @@
-package src.main.java.mejorar_mayor_de_tres;
+package mejorar_mayor_de_tres;
 
 import java.util.Scanner;
 
