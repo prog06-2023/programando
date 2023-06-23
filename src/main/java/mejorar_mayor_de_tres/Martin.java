@@ -8,7 +8,7 @@ public class Martin {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Ingresar un numero que represente la cantidad de numeros de la cual desea saber cual es el mayor.");
         int cantidadNumeros = teclado.nextInt();
-        int mayor = 0;
+        int mayor = Integer.MIN_VALUE;
         int i = 0;
         
         
