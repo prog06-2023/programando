@@ -1,4 +1,4 @@
-package mayor_de_inputs;
+package mejorar_mayor_de_tres;
 
 import java.util.Scanner;
 
@@ -28,5 +28,5 @@ public class Xavpunkxd {
     
         scanner.close();
     }
-        
+        //modificando
 }
