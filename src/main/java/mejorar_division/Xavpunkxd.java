@@ -1,4 +1,4 @@
-package mejora_de_la_divicion;
+package mejorar_division;
 
 import java.util.Scanner;
 
