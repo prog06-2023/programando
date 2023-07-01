@@ -55,7 +55,7 @@ public class Fernando {
     public static float validacion(Scanner entrada){
         if (!entrada.hasNextFloat()){
             System.out.println("Entrada no valida");
-            IngresarValor();
+            ingresarValor();
         }else {
             return entrada.nextFloat();
         }
@@ -64,7 +64,7 @@ public class Fernando {
     public static float ingresarValor(){
         float num;
         Scanner entrada = new Scanner(System.in);
-        num = Validacion(entrada);
+        num = validacion(entrada);
         return num;
     }
     public static float absoluto(float num){
