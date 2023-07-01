@@ -1,3 +1,4 @@
+package division;
 import java.util.Scanner;
 
 public class Fernando {
@@ -13,18 +14,18 @@ public class Fernando {
 
         System.out.println("Ingrese el dividendo, divisor y numero de decimales que deseé (max. 5) en ese orden");
         for (int i = 0; i < 3;i++){
-            valores[i] = IngresarValor();
+            valores[i] = ingresarValor();
         }
 
         //excepcion disivion /0
         while (valores[1] == 0){
             System.out.println("Por favor elija otro numero ya que la division entre cero no se puede");
-            valores[1] = IngresarValor();
+            valores[1] = ingresarValor();
         }
         //Asignacion de signo
-        signo = Signo(valores[0], valores[1]);
-        valores[0] = Absoluto(valores[0]);
-        valores[1] = Absoluto(valores[1]);
+        signo = signo(valores[0], valores[1]);
+        valores[0] = absoluto(valores[0]);
+        valores[1] = absoluto(valores[1]);
 
         //Division
         while (valores[0] >= valores[1]) {
@@ -51,7 +52,7 @@ public class Fernando {
 
     }
 
-    public static float Validacion(Scanner entrada){
+    public static float validacion(Scanner entrada){
         if (!entrada.hasNextFloat()){
             System.out.println("Entrada no valida");
             IngresarValor();
@@ -60,17 +61,17 @@ public class Fernando {
         }
         return 0;
     }
-    public static float IngresarValor(){
+    public static float ingresarValor(){
         float num;
         Scanner entrada = new Scanner(System.in);
         num = Validacion(entrada);
         return num;
     }
-    public static float Absoluto(float num){
+    public static float absoluto(float num){
         num = Math.abs(num);
         return num;
     }
-    public static int Signo(float num, float num2){
+    public static int signo(float num, float num2){
         int signo;
         if((num < 0 && num2 < 0) || (num > 0 && num2 > 0) ){
             signo = 1;
