@@ -1,4 +1,4 @@
-package varias_tareas.una_persona.nimi;
+package varias_tareas.nimi;
 
 public class Main {
     public static void main(String[] args) {
