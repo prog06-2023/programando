@@ -52,19 +52,24 @@ public class Fernando {
 
     }
 
-    public static float validacion(Scanner entrada){
-        if (!entrada.hasNextFloat()){
-            System.out.println("Entrada no valida");
-            ingresarValor();
-        }else {
-            return entrada.nextFloat();
-        }
-        return 0;
+    public static boolean validacion(Scanner entrada){
+        return !entrada.hasNextFloat();
+
     }
     public static float ingresarValor(){
         float num;
+        boolean validacion;
         Scanner entrada = new Scanner(System.in);
-        num = validacion(entrada);
+        validacion = validacion(entrada);
+        if (validacion) {
+            do {
+                System.out.println("no valido");
+                entrada = new Scanner(System.in);
+                validacion = validacion(entrada);
+            } while (validacion);
+        }
+        num = entrada.nextFloat();
+
         return num;
     }
     public static float absoluto(float num){
