@@ -6,7 +6,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * Esta clase define una persona
  *
- * @version 1.0
+ * @version 2.0
+ * @date 04/07/23
  */
 public class Persona {
 
@@ -94,7 +95,11 @@ public class Persona {
     
     //metodo para calcular la edad
     public int calcularEdad() {
-        return LocalDate.now().getYear() - fechaDeNacimiento().getYear();
+        if (diasParaCumpleanhos() >= 0) {
+            return LocalDate.now().getYear() - fechaDeNacimiento().getYear() + 1;
+        } else {
+            return LocalDate.now().getYear() - fechaDeNacimiento().getYear();
+        }
     }
 
     /**
