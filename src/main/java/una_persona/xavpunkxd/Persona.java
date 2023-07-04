@@ -1,29 +1,32 @@
+/*
+ * @version:
+ * @date:04/07/2023
+ */
+
 package una_persona.xavpunkxd;
+
+import java.util.Calendar;
 
 public class Persona {
     //atributos de la persona
     private String name;
     private String lastname;
-    private String born_mounth;
-    private long bornyear;
-    private long actualyear;
+    private int born_mounth;
+    private int born_day;
+    private int bornyear;//esta es la variable para fecha de nacimiento 
+    protected int diasfaltantes;
 
     //constructor con parametros
-    public  Persona (String name,String lastname,String born_mounth,long bornyear,long actualyear) {
+    public  Persona (String name,String lastname,int born_mounth,int bornyear, int born_day) {
         this.name=name;
         this.lastname=lastname;
         this.born_mounth=born_mounth;
-        this.bornyear=bornyear;
-        this.actualyear=actualyear;       
+        this.bornyear=bornyear;     
+        this.born_day=born_day;
     }
 
     //constructor sin parametros
     public Persona(){
-        name="Francisco";
-        lastname="Villa";
-        born_mounth="febrero";
-        bornyear=1980;
-        actualyear=2023;
     }
 
     //getters and setters
@@ -46,42 +49,67 @@ public class Persona {
     }
 
     //born mounth
-    public String getBorn_mounth() {
+    public int getBorn_mounth() {
         return born_mounth;
     }
 
-    public void setBorn_mounth(String born_mounth) {
+    public void setBorn_mounth(int born_mounth) {
         this.born_mounth = born_mounth;
     }
 
     //born year
-    public long getBornyear() {
+    public int getBornyear() {
         return bornyear;
     }
 
-    public void setBornyear(long bornyear) {
+    public void setBornyear(int bornyear) {
         this.bornyear = bornyear;
     }
 
-    //actual year
-    public long getActualyear() {
-        return actualyear;
+     public int getBirthday() {
+        return born_day;
     }
 
-    public void setActualyear(long actualyear) {
-        this.actualyear = actualyear;
+    public void setBirthday(int birthday) {
+        this.born_day = birthday;
     }
+
+    
 
      //tostring
      @Override
      public String toString(){
         return "Nombre: " + this.name + "," + " Apehído: "+this.lastname + "," +" Año de nacimiento: " +
-         this.bornyear + "," +" Mes de nacimiento: " + this.born_mounth + "," +" Año actual: "+this.actualyear;
+         this.bornyear + "," +" Mes de nacimiento: " + this.born_mounth;
      }
 
     //metodo para calcular la edad de las personas
-    public long calcularedad(){
+    public long calcularedad(int bornyear){
+        //llamando al metodo getInstance() para poder obtener el año actual
+        Calendar calendario = Calendar.getInstance();
+        //obteniendo el año actual
+        int actualyear = calendario.get(Calendar.YEAR);        
         return actualyear-bornyear;
+    }
+
+    public long calcularcumpleaños(){
+        
+        Calendar day=Calendar.getInstance();
+        int mes = day.get(Calendar.MONTH) + 1;
+        int dia=day.get(Calendar.DAY_OF_MONTH);
+        
+        if(born_mounth > mes  && born_day < dia){
+        
+            diasfaltantes= ((born_mounth*31)+ born_day) - day.get(Calendar.DAY_OF_YEAR);
+            System.out.println("faltan " +  diasfaltantes +" dias para tu cumpleaños");
+        
+        }else if(born_mounth == mes && born_day == dia){
+            System.out.println("Hoy cumples años, feliciades!");
+        } else {
+            System.out.println("tu cumpleaños ya paso, tienes: " + calcularedad(bornyear) + " años");
+        }
+        
+        return diasfaltantes;
     }
 
     
