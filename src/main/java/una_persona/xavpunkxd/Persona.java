@@ -1,6 +1,6 @@
 /*
- * @version:
- * @date:04/07/2023
+ * @version 1.0 
+ * @date 04/07/2023
  */
 
 package una_persona.xavpunkxd;
