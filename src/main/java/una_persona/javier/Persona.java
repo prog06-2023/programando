@@ -1,20 +1,35 @@
 package una_persona.javier;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+/**
+ * Esta clase define una persona
+ *
+ * @version 1.0
+ */
 public class Persona {
 
     private String nombre;
     private String apellido;
     private int numeroDocumento;
-    private int anhoNacimiento;
+    private String fechaNacimiento;
 
-//    constructor con argumentos 
-    public Persona(String nombre, String apellido, int nroDocumento, int anhoNacimiento) {
+    /**
+     * Construcctor con argumentos para una persona
+     *
+     * @param nombre String que define el nombre de la persona
+     * @param apellido String que define el apellido de la persona
+     * @param nroDocumento entero que define el numero de documento
+     * @param fechaNacimiento String que define la fecha de nacimiento, formato
+     * DD/MM/AAAA
+     */
+
+    public Persona(String nombre, String apellido, int nroDocumento, String fechaNacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.numeroDocumento = nroDocumento;
-        this.anhoNacimiento = anhoNacimiento;
+        this.fechaNacimiento = fechaNacimiento;
 
     }
 
@@ -47,12 +62,12 @@ public class Persona {
         this.numeroDocumento = numeroDocumento;
     }
 
-    public int getAnhoNacimiento() {
-        return anhoNacimiento;
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setAnhoNacimiento(int anhoNacimiento) {
-        this.anhoNacimiento = anhoNacimiento;
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
 // toString
@@ -60,15 +75,40 @@ public class Persona {
     public String toString() {
 
         return "Nombre: " + this.nombre + " Apellido: " + this.apellido + " Nacido en: "
-                + this.anhoNacimiento + " Nro. de Documento: " + this.numeroDocumento;
+                + this.fechaNacimiento + " Nro. de Documento: " + this.numeroDocumento;
+    }
+/**
+ * metodo que convierte el String fechaNacimiento en una fecha del tipo LocalDate
+ * @return una fecha de naciemiento 
+ */
+    public LocalDate fechaDeNacimiento() {
+        DateTimeFormatter patronFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaNac = LocalDate.parse(this.fechaNacimiento, patronFecha);
+        return fechaNac;
     }
 
-//metodo para calcular la edad
-    public int calcularEdad(int anhoNacimiento) {
-        Calendar calendario = Calendar.getInstance();
-        int anhoActual = calendario.get(Calendar.YEAR);
-
-        return anhoActual - anhoNacimiento;
+    /**
+     * metodo que calcula la edad de la persona
+     * @return un entero que representa la edad 
+     */
+    
+    //metodo para calcular la edad
+    public int calcularEdad() {
+        return LocalDate.now().getYear() - fechaDeNacimiento().getYear();
     }
 
+    /**
+     * Metodo que calcula la cantidad de dias que faltan para que la persona cumpla años
+     * @return int 
+     */
+    
+    public int diasParaCumpleanhos() {
+        int diferenciaDias = fechaDeNacimiento().getDayOfYear() - LocalDate.now().getDayOfYear();
+
+        if (diferenciaDias < 0) {
+            return diferenciaDias + LocalDate.now().lengthOfYear();
+        } else {
+            return diferenciaDias;
+        }
+    }
 }
