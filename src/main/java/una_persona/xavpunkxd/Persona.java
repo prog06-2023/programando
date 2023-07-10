@@ -92,7 +92,7 @@ public class Persona {
         return actualyear-bornyear;
     }
 
-    public long calcularcumpleaños(){
+    public long calculateBirthay(){
         
         Calendar day=Calendar.getInstance();
         int mes = day.get(Calendar.MONTH) + 1;

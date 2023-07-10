@@ -8,7 +8,7 @@ public class Main {
         
         System.out.println("\n" +"Hola "+persona2.getName()+" "+persona2.getLastname()); 
         System.out.println("tu fecha de nacimiento es el dia: "+persona2.getBirthday()+ " del mes "+ persona2.getBorn_mounth() + " del año "+persona2.getBornyear());
-        persona2.calcularcumpleaños();
+        persona2.calculateBirthay();
 
         //imprimiendo usando el toString
         //si cambias la fecha se actualiza ;)
@@ -16,7 +16,7 @@ public class Main {
 
         System.out.println("\nImprimiendo con el uso de toString: ");
         System.out.println(persona3.toString()+"\n");
-        persona3.calcularcumpleaños();
+        persona3.calculateBirthay();
     }
 
 }
