@@ -1,4 +1,4 @@
-package una_persona.EdgarT;
+package una_persona.edgarT;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

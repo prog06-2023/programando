@@ -1,4 +1,4 @@
-package una_persona.EdgarT;
+package una_persona.edgarT;
 public class Main {
 
     public static void main(String[] args) {
