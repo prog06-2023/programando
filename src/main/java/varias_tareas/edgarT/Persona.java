@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @version 1.0
+ * @version 1.1
  * @author Edgar Tuyarot
  */
 public class Persona {
@@ -57,9 +57,9 @@ public class Persona {
         int id ;
         String rta = "si";
         String descripcion = "";
-        System.out.println("*******************");
-        System.out.println("*Ingresando Tareas*");
-        System.out.println("*******************");
+        System.out.println("-------------------");
+        System.out.println(" Ingresando Tareas ");
+        System.out.println("-------------------");
         System.out.println("");
         while (rta.equals("si")){
             System.out.println("Ingrese ID");
@@ -91,53 +91,62 @@ public class Persona {
     private void modificarTarea(){
         Scanner scanner = new Scanner(System.in);
         String descripcion = "";
-        System.out.println("*******************");
-        System.out.println("*Modificando Tarea*");
-        System.out.println("*******************");
-        System.out.println("Ingresa el Numero de tarea a modificar");
-        int idTarea = scanner.nextInt();
+        //Verificamos que la persona tenga tareas
+        if (tareas.isEmpty()){
+            System.out.println("Sin tareas asignadas");
+        }else {
+            System.out.println("-------------------");
+            System.out.println(" Modificando Tarea ");
+            System.out.println("-------------------");
+            System.out.println("Ingresa el Numero de tarea a modificar");
+            int idTarea = scanner.nextInt();
 
-        for (int i = 0; i<tareas.size();i++){
-            if (tareas.get(i).getId() == idTarea){
-                System.out.println("Va a modificar: "+tareas.get(i).getId()+"-"+tareas.get(i).getDescripcion());
-                System.out.println("Ingrese Nueva Descripcion");
-                descripcion = scanner.next();
-                tareas.get(i).setDescripcion(descripcion);
-                break;
+            for (int i = 0; i < tareas.size(); i++) {
+                if (tareas.get(i).getId() == idTarea) {
+                    System.out.println("Va a modificar: " + tareas.get(i).getId() + "-" + tareas.get(i).getDescripcion());
+                    System.out.println("Ingrese Nueva Descripcion");
+                    descripcion = scanner.next();
+                    tareas.get(i).setDescripcion(descripcion);
+                    break;
+                }
             }
+            if (descripcion == "") {
+                System.out.println("No Existe la tarea");
+            }
+
+
         }
-        if (descripcion == ""){
-            System.out.println("No Existe la tarea");
-        }
-
-
-
     }
     private void elimiarTarea(){
         Scanner scanner = new Scanner(System.in);
         String rta = "";
-        System.out.println("*******************");
-        System.out.println("*Eliminando Tarea*");
-        System.out.println("*******************");
-        System.out.println("Ingresa el Numero de tarea a modificar");
-        int idTarea = scanner.nextInt();
+        //Verificamos que la persona tenga tareas
+        if (tareas.isEmpty()){
+            System.out.println("Sin tareas asignadas");
+        }else {
+            System.out.println("------------------");
+            System.out.println("*Eliminando Tarea*");
+            System.out.println("------------------");
+            System.out.println("Ingresa el Numero de tarea a eliminar");
+            int idTarea = scanner.nextInt();
 
-        for (int i = 0; i<tareas.size();i++){
-            if (tareas.get(i).getId() == idTarea){
-                System.out.println("Va a Eliminar: "+tareas.get(i).getId()+"-"+tareas.get(i).getDescripcion()+" desea continuar? si/no");
-                rta = scanner.next();
-                if(rta.equals("si")){
-                    tareas.remove(i);
-                    System.out.println("Tarea Eliminada");
-                    break;
+            for (int i = 0; i < tareas.size(); i++) {
+                if (tareas.get(i).getId() == idTarea) {
+                    System.out.println("Va a Eliminar: " + tareas.get(i).getId() + "-" + tareas.get(i).getDescripcion() + " desea continuar? si/no");
+                    rta = scanner.next();
+                    if (rta.equals("si")) {
+                        tareas.remove(i);
+                        System.out.println("Tarea Eliminada");
+                        break;
+                    }
+
                 }
-
             }
-        }
-        if (rta.equals("")){
-            System.out.println("No Existe la tarea");
-        } else if (rta.equals("no")) {
-            System.out.println("Sin cambios en tareas");
+            if (rta.equals("")) {
+                System.out.println("No Existe la tarea");
+            } else if (rta.equals("no")) {
+                System.out.println("Sin cambios en tareas");
+            }
         }
     }
 
@@ -145,17 +154,16 @@ public class Persona {
         Scanner scanner = new Scanner(System.in);
         String opcion = "";
         while(!(opcion.toUpperCase().equals("Q"))) {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-            System.out.println("************Menu*************");
+            System.out.println("------------Menu-------------");
             System.out.println(" A-Agregar Tarea             ");
             System.out.println(" M-Modificar Tarea           ");
             System.out.println(" D-Eliminar Tarea            ");
             System.out.println(" Q-Salir                     ");
-            System.out.println("                             ");
+            System.out.println("");
             System.out.println(" Tareas Actuales:            ");
             mostrarTareas();
             System.out.println("-----------------------------");
+            System.out.println("Seleccion opcion");
             opcion = scanner.next();
 
             if (opcion.toUpperCase().equals("A")) {
