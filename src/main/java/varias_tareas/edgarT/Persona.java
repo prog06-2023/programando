@@ -61,7 +61,7 @@ public class Persona {
         System.out.println(" Ingresando Tareas ");
         System.out.println("-------------------");
         System.out.println("");
-        while (rta.equals("si")){
+        do {
             System.out.println("Ingrese ID");
             id = scanner.nextInt();
             System.out.println("Ingrese Descripcion");
@@ -76,15 +76,13 @@ public class Persona {
                         break;
                     }
                 }
-                if (id == -1){
-                    continue;
-                }else{
+                if (!(id == -1)){
                     tareas.add(new Tarea(id,descripcion));
                 }
             }
             System.out.println("Desea ingresar otra tarea si/no");
             rta = scanner.next();
-        }
+        } while (rta.equals("si"));
 
 
     }
