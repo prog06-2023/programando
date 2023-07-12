@@ -74,6 +74,10 @@ public class Persona {
             edad[0] = (LocalDate.now().getYear() - fechaNacimiento.getYear());
         }
 
+        if (restantes<0){
+            edad[1] = 365 + restantes;
+        }
+
         return edad;
     }
     //validacion de formato de fecha
