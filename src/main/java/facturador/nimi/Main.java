@@ -1,7 +1,7 @@
-package varias_tareas.no_editar;
+package facturador.nimi;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("No editar");
+        System.out.println("un mensaje");
     }
 }
