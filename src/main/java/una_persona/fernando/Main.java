@@ -1,4 +1,4 @@
-package una_persona.Fernando;
+package una_persona.fernando;
 
 import java.time.LocalDate;
 import java.util.Scanner;
