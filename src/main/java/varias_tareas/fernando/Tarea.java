@@ -1,15 +1,17 @@
 package varias_tareas.fernando;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Esta clase sirve para instanciar a un objeto de tipo Tarea
- * @version 1.0
+ * @version 1.1
  * @author Fernando García Cano
  */
 
 public class Tarea {
     private static int id = 0;
+    private String idTarea;
     private String descripcion;
     private String nombreTarea;
 
@@ -26,12 +28,10 @@ public class Tarea {
      * @param nombreTarea
      * @param descripcion
      */
-    public Tarea(String nombreTarea, String descripcion){
+    public Tarea(String nombreTarea, String descripcion, String idTarea){
         this.descripcion = descripcion;
         this.nombreTarea = nombreTarea;
-        if (Tarea.id >= 10){
-            Tarea.id = 0;
-        }
+        this.idTarea = idTarea;
         Tarea.id++;
     }
 
@@ -40,21 +40,7 @@ public class Tarea {
      */
 
     public void display(){
-        System.out.println("Id de la tarea: " + Tarea.id + "/ " + "Nombre de la tarea: " + this.nombreTarea + "/ " + "Descripcion: " + this.descripcion);
-    }
-
-    /**
-     * Este metodo nos ayuda a mostrar el menu con las opciones que el usuario puede
-     */
-    public static void mostrarMenu(){
-        System.out.println("==============================================");
-        System.out.println("Bienvenido al Administrador de Tareas");
-        System.out.println("Elija una opcion valida");
-        System.out.println("A - agregar tarea");
-        System.out.println("M - modificar tarea");
-        System.out.println("D - eliminar tarear");
-        System.out.println("Q - salir");
-        System.out.println("==============================================");
+        System.out.println("Id de la tarea: " + this.idTarea + "/ " + "Nombre de la tarea: " + this.nombreTarea + "/ " + "Descripcion: " + this.descripcion);
     }
 
     /**
@@ -62,7 +48,7 @@ public class Tarea {
      * @param entrada
      * @param db
      */
-    public static void agregarTarea(Scanner entrada, Tarea[] db){
+    public static void agregarTarea(Scanner entrada, ArrayList<Tarea> db){
         String[] datosTarea = new String[3];
         System.out.println("==============================================");
         System.out.println("Ingrese el nombre de la tarea: ");
@@ -71,9 +57,9 @@ public class Tarea {
         datosTarea[1] = entrada.next();
         datosTarea[2] = String.valueOf(Tarea.id);
         System.out.println("==============================================");
-        Tarea tarea = new Tarea(datosTarea[0], datosTarea[1]);
-        db[Tarea.id - 1] = tarea;
-        db[Tarea.id - 1].display();
+        Tarea tarea = new Tarea(datosTarea[0], datosTarea[1], datosTarea[2]);
+        db.add(Tarea.id - 1, tarea);
+        mostrarTareasActuales(db);
     }
 
     /**
@@ -81,17 +67,17 @@ public class Tarea {
      * @param entrada
      * @param db
      */
-    public static void modificarTarea(Scanner entrada, Tarea[] db){
+    public static void modificarTarea(Scanner entrada, ArrayList<Tarea> db){
         String  valor;
         System.out.println("==============================================");
         System.out.println("Ingrese el id de la tarea a modificar: ");
         valor = entrada.next();
         valor = validarId(valor, entrada);
         System.out.println("Ingrese el nombre de la tarea: ");
-        db[Integer.parseInt(valor) - 1].setNombreTarea(entrada.next());
+        db.get(Integer.parseInt(valor)).setNombreTarea(entrada.next());
         System.out.println("Ingrese descripcion de la tarea: ");
-        db[Integer.parseInt(valor) - 1].setDescripcion(entrada.next());
-        db[Integer.parseInt(valor) - 1 ].display();
+        db.get(Integer.parseInt(valor)).setDescripcion(entrada.next());
+        mostrarTareasActuales(db);
     }
 
     /**
@@ -100,15 +86,15 @@ public class Tarea {
      * @param db
      */
 
-    public static void eliminarTarea(Scanner entrada, Tarea[] db){
+    public static void eliminarTarea(Scanner entrada, ArrayList<Tarea> db){
         String valor;
         System.out.println("==============================================");
         System.out.println("Ingrese el id de la tarea a eliminar: ");
         valor = entrada.next();
         valor = validarId(valor, entrada);
-        System.out.println("Eliminando: " + db[Integer.parseInt(valor) - 1]);
-        db[Integer.parseInt(valor) - 1] = null;
-        System.out.println(db[Integer.parseInt(valor) - 1]);
+        System.out.println("Eliminando: " + db.get(Integer.parseInt(valor)));
+        db.remove(Integer.parseInt(valor));
+        mostrarTareasActuales(db);
     }
 
     /**
@@ -127,6 +113,13 @@ public class Tarea {
             } while (!valor.matches(validar));
         }
         return valor;
+    }
+    public static void mostrarTareasActuales(ArrayList<Tarea> db){
+        for (int i = 0; i < db.size(); i++){
+            if (db.get(i) != null){
+                db.get(i).display();
+            }
+        }
     }
 
     public void setDescripcion(String descripcion) {
