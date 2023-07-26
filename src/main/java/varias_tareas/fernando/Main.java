@@ -1,17 +1,18 @@
 package varias_tareas.fernando;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Clase principal
  *
- * @version 1.0
+ * @version 1.1
  * @author Fernando García Cano
  *
  */
 
 public class Main {
-    static Tarea[] db = new Tarea[10];
+    static ArrayList<Tarea> db = new ArrayList<Tarea>();
 
     public static void main(String[] args) {
         String input = "";
@@ -19,8 +20,9 @@ public class Main {
         Persona persona = new Persona("Fernando", "García");
 
         while(!input.equals("Q")){
-            Tarea.mostrarMenu();
+            mostrarMenu();
             input = entrada.next();
+            input = input.toUpperCase();
             switch (input){
                 case "A":
                     Tarea.agregarTarea(entrada, db);
@@ -34,11 +36,7 @@ public class Main {
                 case "Q":
 
                     System.out.println(persona.getNombre() + " " + persona.getApellido() + " " + "tareas actuales: ");
-                    for (int i = 0; i < db.length; i++){
-                        if (db[i] != null){
-                            db[i].display();
-                        }
-                    }
+                    Tarea.mostrarTareasActuales(db);
                     break;
                 default:
                     System.out.println("Elija una opcion valida");
@@ -47,5 +45,19 @@ public class Main {
         }
         entrada.close();
 
+    }
+
+    /**
+     * Este metodo nos ayuda a mostrar el menu con las opciones que el usuario puede
+     */
+    public static void mostrarMenu(){
+        System.out.println("==============================================");
+        System.out.println("Bienvenido al Administrador de Tareas");
+        System.out.println("Elija una opcion valida");
+        System.out.println("A - agregar tarea");
+        System.out.println("M - modificar tarea");
+        System.out.println("D - eliminar tarear");
+        System.out.println("Q - salir");
+        System.out.println("==============================================");
     }
 }
