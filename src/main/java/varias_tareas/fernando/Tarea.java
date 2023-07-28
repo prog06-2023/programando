@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * Esta clase sirve para instanciar a un objeto de tipo Tarea
- * @version 1.1
+ * @version 1.2
  * @author Fernando García Cano
  */
 
@@ -40,7 +40,7 @@ public class Tarea {
      */
 
     public void display(){
-        System.out.println("Id de la tarea: " + this.idTarea + "/ " + "Nombre de la tarea: " + this.nombreTarea + "/ " + "Descripcion: " + this.descripcion);
+        System.out.println("Id de la tarea: " + this.idTarea + "/ " + "Nombre de la tarea: " + this.nombreTarea + "/ " + "Descripcion: " + this.descripcion + "/ " + this);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Tarea {
         datosTarea[2] = String.valueOf(Tarea.id);
         System.out.println("==============================================");
         Tarea tarea = new Tarea(datosTarea[0], datosTarea[1], datosTarea[2]);
-        db.add(Tarea.id - 1, tarea);
+        db.add(tarea);
         mostrarTareasActuales(db);
     }
 
@@ -69,14 +69,17 @@ public class Tarea {
      */
     public static void modificarTarea(Scanner entrada, ArrayList<Tarea> db){
         String  valor;
+        int idEncontrado;
         System.out.println("==============================================");
         System.out.println("Ingrese el id de la tarea a modificar: ");
         valor = entrada.next();
         valor = validarId(valor, entrada);
+        idEncontrado = encontraId(db, valor);
+        validarIdDentroRango(idEncontrado, valor, entrada, db);
         System.out.println("Ingrese el nombre de la tarea: ");
-        db.get(Integer.parseInt(valor)).setNombreTarea(entrada.next());
+        db.get(idEncontrado).setNombreTarea(entrada.next());
         System.out.println("Ingrese descripcion de la tarea: ");
-        db.get(Integer.parseInt(valor)).setDescripcion(entrada.next());
+        db.get(idEncontrado).setDescripcion(entrada.next());
         mostrarTareasActuales(db);
     }
 
@@ -88,12 +91,14 @@ public class Tarea {
 
     public static void eliminarTarea(Scanner entrada, ArrayList<Tarea> db){
         String valor;
+        int idEncontrado;
         System.out.println("==============================================");
         System.out.println("Ingrese el id de la tarea a eliminar: ");
         valor = entrada.next();
         valor = validarId(valor, entrada);
-        System.out.println("Eliminando: " + db.get(Integer.parseInt(valor)));
-        db.remove(Integer.parseInt(valor));
+        idEncontrado = encontraId(db, valor);
+        validarIdDentroRango(idEncontrado, valor, entrada, db);
+        db.remove(idEncontrado);
         mostrarTareasActuales(db);
     }
 
@@ -107,18 +112,65 @@ public class Tarea {
         String validar = "^[0-9]*";
         if(!valor.matches(validar)){
             do {
-                System.out.println();
+                System.out.println("Valor no aceptado");
                 valor = entrada.next();
 
             } while (!valor.matches(validar));
         }
         return valor;
     }
+
+    /**
+     * Este metodo nos ayuda a desplegar en consola las tareas que el usuario tiene hasta el momento
+     * @param db
+     */
+
     public static void mostrarTareasActuales(ArrayList<Tarea> db){
         for (int i = 0; i < db.size(); i++){
             if (db.get(i) != null){
                 db.get(i).display();
             }
+        }
+    }
+
+    /**
+     * Este metodo nos ayuda a encontrar en index en el que se encuentra la tarea a modificar/eliminar en base a su atributo id
+     * @param db
+     * @param valor
+     * @return
+     */
+    public static int encontraId(ArrayList<Tarea> db, String valor){
+        int idEncontrado = -1;
+        for (Tarea tarea : db){
+            if (tarea.getIdTarea().equals(valor)){
+                idEncontrado = db.indexOf(tarea);
+                return idEncontrado;
+            }
+        }
+        return idEncontrado;
+    }
+
+    /**
+     * Este metodo nos ayuda a asegurar que el id ingresado por el usuario este dentro de nuestra base de datos de tareas
+     * de otro modo solicitara un valido
+     * @param idEncontrado
+     * @param valor
+     * @param entrada
+     * @param db
+     * @return
+     */
+    public static int validarIdDentroRango(int idEncontrado, String valor, Scanner entrada, ArrayList<Tarea> db){
+        if (idEncontrado == -1){
+            do {
+                System.out.println("Id de tarea no encontrado porfavor digite un id valido");
+                valor = entrada.next();
+                valor = validarId(valor, entrada);
+                idEncontrado = encontraId(db, valor);
+
+            } while (idEncontrado == -1);
+            return idEncontrado;
+        }else {
+            return idEncontrado;
         }
     }
 
@@ -128,5 +180,17 @@ public class Tarea {
 
     public void setNombreTarea(String nombreTarea) {
         this.nombreTarea = nombreTarea;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getNombreTarea() {
+        return nombreTarea;
+    }
+
+    public String getIdTarea() {
+        return idTarea;
     }
 }
