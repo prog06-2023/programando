@@ -1,15 +1,17 @@
 package varias_tareas.fernando;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Esta clase sirve para instanciar a un objeto de tipo Tarea
- * @version 1.0
+ * @version 1.3
  * @author Fernando García Cano
  */
 
 public class Tarea {
     private static int id = 0;
+    private String idTarea;
     private String descripcion;
     private String nombreTarea;
 
@@ -26,12 +28,10 @@ public class Tarea {
      * @param nombreTarea
      * @param descripcion
      */
-    public Tarea(String nombreTarea, String descripcion){
+    public Tarea(String nombreTarea, String descripcion, String idTarea){
         this.descripcion = descripcion;
         this.nombreTarea = nombreTarea;
-        if (Tarea.id >= 10){
-            Tarea.id = 0;
-        }
+        this.idTarea = idTarea;
         Tarea.id++;
     }
 
@@ -40,93 +40,70 @@ public class Tarea {
      */
 
     public void display(){
-        System.out.println("Id de la tarea: " + Tarea.id + "/ " + "Nombre de la tarea: " + this.nombreTarea + "/ " + "Descripcion: " + this.descripcion);
-    }
-
-    /**
-     * Este metodo nos ayuda a mostrar el menu con las opciones que el usuario puede
-     */
-    public static void mostrarMenu(){
-        System.out.println("==============================================");
-        System.out.println("Bienvenido al Administrador de Tareas");
-        System.out.println("Elija una opcion valida");
-        System.out.println("A - agregar tarea");
-        System.out.println("M - modificar tarea");
-        System.out.println("D - eliminar tarear");
-        System.out.println("Q - salir");
-        System.out.println("==============================================");
+        System.out.println("Id de la tarea: " + this.idTarea + "/ " + "Nombre de la tarea: " + this.nombreTarea + "/ " + "Descripcion: " + this.descripcion + "/ " + this);
     }
 
     /**
      * Este metodo sirve para agregar una nueva tarea a nuestra base de datos de nuestro usuario
-     * @param entrada
+     * @param tarea
      * @param db
      */
-    public static void agregarTarea(Scanner entrada, Tarea[] db){
-        String[] datosTarea = new String[3];
-        System.out.println("==============================================");
-        System.out.println("Ingrese el nombre de la tarea: ");
-        datosTarea[0] = entrada.next();
-        System.out.println("Ingrese descripcion de la tarea: ");
-        datosTarea[1] = entrada.next();
-        datosTarea[2] = String.valueOf(Tarea.id);
-        System.out.println("==============================================");
-        Tarea tarea = new Tarea(datosTarea[0], datosTarea[1]);
-        db[Tarea.id - 1] = tarea;
-        db[Tarea.id - 1].display();
+    public static void agregarTarea(Tarea tarea, ArrayList<Tarea> db){
+        db.add(tarea);
+        mostrarTareasActuales(db);
     }
 
-    /**
-     * Este metodo nos ayuda a modificar alguna de nuestras tareas mediante el id de la tarea
-     * @param entrada
-     * @param db
-     */
-    public static void modificarTarea(Scanner entrada, Tarea[] db){
-        String  valor;
-        System.out.println("==============================================");
-        System.out.println("Ingrese el id de la tarea a modificar: ");
-        valor = entrada.next();
-        valor = validarId(valor, entrada);
-        System.out.println("Ingrese el nombre de la tarea: ");
-        db[Integer.parseInt(valor) - 1].setNombreTarea(entrada.next());
-        System.out.println("Ingrese descripcion de la tarea: ");
-        db[Integer.parseInt(valor) - 1].setDescripcion(entrada.next());
-        db[Integer.parseInt(valor) - 1 ].display();
-    }
 
     /**
      * Este metodo nos ayuda a eliminar alguna tarea del usuario mediante el id de la tarea
-     * @param entrada
+     * @param idEncontrado
      * @param db
      */
 
-    public static void eliminarTarea(Scanner entrada, Tarea[] db){
-        String valor;
-        System.out.println("==============================================");
-        System.out.println("Ingrese el id de la tarea a eliminar: ");
-        valor = entrada.next();
-        valor = validarId(valor, entrada);
-        System.out.println("Eliminando: " + db[Integer.parseInt(valor) - 1]);
-        db[Integer.parseInt(valor) - 1] = null;
-        System.out.println(db[Integer.parseInt(valor) - 1]);
+    public static void eliminarTarea(int idEncontrado, ArrayList<Tarea> db){
+        db.remove(idEncontrado);
+        mostrarTareasActuales(db);
     }
 
     /**
      * Este metodo nos ayuda avalidar que la entrada del usuario solo sean numeros
+     *
      * @param valor
-     * @param entrada
      * @return
      */
-    public static String validarId(String valor, Scanner entrada){
+    public static boolean validarId(String valor){
         String validar = "^[0-9]*";
-        if(!valor.matches(validar)){
-            do {
-                System.out.println();
-                valor = entrada.next();
+        return valor.matches(validar);
+    }
 
-            } while (!valor.matches(validar));
+    /**
+     * Este metodo nos ayuda a desplegar en consola las tareas que el usuario tiene hasta el momento
+     * @param db
+     */
+
+    public static void mostrarTareasActuales(ArrayList<Tarea> db){
+        for (int i = 0; i < db.size(); i++){
+            if (db.get(i) != null){
+                db.get(i).display();
+            }
         }
-        return valor;
+    }
+
+    /**
+     * Este metodo nos ayuda a encontrar en index en el que se encuentra la tarea a modificar/eliminar en base a su atributo id
+     * @param db
+     * @param valor
+     * @return
+     */
+    public static int encontraId(ArrayList<Tarea> db, String valor){
+        int idEncontrado = -1;
+        for (Tarea tarea : db){
+            if (tarea.getIdTarea().equals(valor)){
+                idEncontrado = db.indexOf(tarea);
+                return idEncontrado;
+            }
+        }
+        return idEncontrado;
     }
 
     public void setDescripcion(String descripcion) {
@@ -135,5 +112,21 @@ public class Tarea {
 
     public void setNombreTarea(String nombreTarea) {
         this.nombreTarea = nombreTarea;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public String getNombreTarea() {
+        return nombreTarea;
+    }
+
+    public String getIdTarea() {
+        return idTarea;
+    }
+
+    public static int getId() {
+        return id;
     }
 }
