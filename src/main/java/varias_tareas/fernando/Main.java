@@ -17,6 +17,7 @@ public class Main {
     public static void main(String[] args) {
         String input = "";
         String  valor;
+        String[] datosTarea = new String[3];
         int idEncontrado;
         Scanner entrada = new Scanner(System.in);
         Persona persona = new Persona("Fernando", "García");
@@ -27,7 +28,6 @@ public class Main {
             input = input.toUpperCase();
             switch (input){
                 case "A":
-                    String[] datosTarea = new String[3];
                     System.out.println("==============================================");
                     System.out.println("Ingrese el nombre de la tarea: ");
                     datosTarea[0] = entrada.next();
@@ -50,6 +50,10 @@ public class Main {
                         } while (!Tarea.validarId(valor));
                     }
                     idEncontrado = Tarea.encontraId(db, valor);
+                    if (idEncontrado == 0){
+                        System.out.println("No hay tareas para modificar");
+                        break;
+                    }
                     if (idEncontrado == -1){
                         do {
                             System.out.println("Id de tarea no encontrado porfavor digite un id valido");
@@ -59,10 +63,10 @@ public class Main {
                         } while (idEncontrado == -1 && !Tarea.validarId(valor));
                     }
                     System.out.println("Ingrese el nombre de la tarea: ");
-                    db.get(idEncontrado).setNombreTarea(entrada.next());
+                    datosTarea[0] = entrada.next();
                     System.out.println("Ingrese descripcion de la tarea: ");
-                    db.get(idEncontrado).setDescripcion(entrada.next());
-                    Tarea.mostrarTareasActuales(db);
+                    datosTarea[1] = entrada.next();
+                    Tarea.modificarTarea(datosTarea,idEncontrado,db);
 
                     break;
                 case "D":
@@ -88,7 +92,6 @@ public class Main {
                     Tarea.eliminarTarea(idEncontrado, db);
                     break;
                 case "Q":
-
                     System.out.println(persona.getNombre() + " " + persona.getApellido() + " " + "tareas actuales: ");
                     Tarea.mostrarTareasActuales(db);
                     entrada.close();

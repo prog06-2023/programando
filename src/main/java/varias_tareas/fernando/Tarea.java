@@ -53,6 +53,13 @@ public class Tarea {
         mostrarTareasActuales(db);
     }
 
+    public static void modificarTarea(String[] datosTarea, int idEncontrado, ArrayList<Tarea> db) {
+        db.get(idEncontrado).setNombreTarea(datosTarea[0]);
+        db.get(idEncontrado).setDescripcion(datosTarea[1]);
+        Tarea.mostrarTareasActuales(db);
+
+    }
+
 
     /**
      * Este metodo nos ayuda a eliminar alguna tarea del usuario mediante el id de la tarea
@@ -87,6 +94,9 @@ public class Tarea {
                 db.get(i).display();
             }
         }
+        if (db.isEmpty()){
+            System.out.println("No hay tareas actualmente");
+        }
     }
 
     /**
@@ -102,6 +112,9 @@ public class Tarea {
                 idEncontrado = db.indexOf(tarea);
                 return idEncontrado;
             }
+        }
+        if (db.isEmpty()){
+            return idEncontrado = 0;
         }
         return idEncontrado;
     }
