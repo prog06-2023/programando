@@ -69,36 +69,5 @@ public class Persona {
 
     }
 
-    public void agregarTareas(Tarea tarea, ArrayList tareas){ 
-        tareas.add(tarea);
-    }
-
-    public Tarea getTareaPorId(int id, ArrayList<Tarea> tareas) {
-        for (Tarea tarea : tareas) {
-            if (tarea.getId() == id) {
-                return tarea;
-            }
-        }
-        return null;
-
-    }
     
-    public void eliminarTarea(int id, ArrayList<Tarea> tareas){
-        int indiceTarea = id - 1;
-        tareas.remove(indiceTarea);
-    
-    }
-
-    public void modificarTarea(int id, ArrayList<Tarea> tareas, Tarea tarea) {
-        Tarea tareaModificada = new Tarea(id, tarea.getNombre(), tarea.getDescripcion(), tarea.isRealizada());
-        
-        for (Tarea tar : tareas) {
-            if (this.getTareaPorId(id, tareas) != null) {
-                tar = tareaModificada;
-                
-            }       
-        }
-        tareas.add(id - 1, tareaModificada);
-        this.eliminarTarea(id, tareas);
-    }
 }

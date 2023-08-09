@@ -14,9 +14,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Saludos! Por Favor para comenzar necesito tomarle sus datos...");
         System.out.println("Comenzemos -> Nombre: ");
-        String nombre = scanner.nextLine();
+        String nombre = scanner.next();
         System.out.println("Apellido: ");
-        String apellido = scanner.nextLine();
+        String apellido = scanner.next();
         System.out.println("Aguarde un minuto estamos creandole un usuario! :)");
         Persona usuario = new Persona(nombre, apellido);
         String opcion;
@@ -26,17 +26,17 @@ public class Main {
         do {
 
             menuPrincipal(usuario);
-            opcion = scanner.nextLine().toUpperCase();
+            opcion = scanner.next().toUpperCase();
 
             switch (opcion) {
 
                 case "A":
                     System.out.println("Ingrese el nombre de la tarea: ");
-                    String nombreTarea = scanner.nextLine();
+                    String nombreTarea = scanner.next();
                     System.out.println("Ingrese una descipcion: ");
-                    String descripcion = scanner.nextLine();
+                    String descripcion = scanner.next();
                     System.out.println("Ingrese el estado su tarea ( Realizada / No Realizada )");
-                    String realizada = scanner.nextLine();
+                    String realizada = scanner.next();
                     
                     Tarea nuevaTarea = new Tarea(nombreTarea, descripcion, realizada);
                     
@@ -61,7 +61,7 @@ public class Main {
                     System.out.println("Aca tiene una lista de las tareas...");
                     System.out.println(usuario.getTareas().toString());
                     System.out.println("Desea hacer algo mas? (S / N)");
-                    opcionDos = scanner.nextLine().toUpperCase();
+                    opcionDos = scanner.next().toUpperCase();
                     break;
                     }
                     
@@ -81,17 +81,17 @@ public class Main {
                         System.out.println("Ingrese el numero de la tarea que quiere modificar: ");
                         id = scanner.nextInt();
                         System.out.println("Ingrese el nombre de la tarea: ");
-                        nombreTareaMod = scanner.nextLine();
+                        nombreTareaMod = scanner.next();
                         System.out.println("Ingrese una descipcion: ");
-                        descripcionTareaMod = scanner.nextLine();
+                        descripcionTareaMod = scanner.next();
                         System.out.println("Ingrese el estado su tarea ( Realizada / No Realizada )");
-                        estadoTareaMod = scanner.nextLine();
+                        estadoTareaMod = scanner.next();
 
-                        Tarea tareaAModificar = new Tarea(nombreTareaMod, descripcionTareaMod, estadoTareaMod);
+                        Tarea tareaAModificar = new Tarea(id,nombreTareaMod, descripcionTareaMod, estadoTareaMod);
 
-                        usuario.modificarTarea(id, usuario.getTareas(), tareaAModificar);
+                        tareaAModificar.modificarTarea(usuario.getTareas(), tareaAModificar);
                         System.out.println("Desea hacer algo mas? (S / N)");
-                        opcionDos = scanner.nextLine().toUpperCase();
+                        opcionDos = scanner.next().toUpperCase();
                         break;
                     }
 
@@ -104,8 +104,9 @@ public class Main {
                     System.out.println(usuario.getTareas().toString());
                     System.out.println("Ingrese el numero de la tarea que quiere borrar: ");
                     id = scanner.nextInt();
-                    usuario.eliminarTarea(id, usuario.getTareas());
-                    System.out.println("Tarea Elimiinada");
+                    usuario.getTareas().get( id - 1).eliminarTarea(id, usuario.getTareas());
+
+                    System.out.println("Tarea Eliminada");
                     System.out.println("Desea hacer algo mas? (S / N)");
                     opcionDos = scanner.nextLine().toUpperCase();
                     break;

@@ -85,4 +85,34 @@ public class Tarea {
 
     }
 
+    public void agregarTareas(Tarea tarea, ArrayList tareas){ 
+        tareas.add(tarea);
+    }
+
+    public Tarea getTareaPorId(int id, ArrayList<Tarea> tareas) {
+        for (Tarea tarea : tareas) {
+            if (tarea.getId() == id) {
+                return tarea;
+            }
+        }
+        return null;
+
+    }
+    
+    public void eliminarTarea(int id, ArrayList<Tarea> tareas){
+        int indiceTarea = id - 1;
+        tareas.remove(indiceTarea);
+    
+    }
+
+    public void modificarTarea(ArrayList<Tarea> tareas, Tarea tarea) {
+                
+        for (Tarea tar : tareas) {
+            if (tar.getId() == tarea.getId()) {
+                tar.setDescripcion(tarea.getDescripcion());
+                
+            }       
+        }
+    }
+    
 }
