@@ -36,6 +36,9 @@ public class Main {
 
         do{
             ShowMenu();//showing the options in the console
+            System.out.println("Lista de tareas: \n");
+            ShowtaskList();
+
             Option= scan.nextLine();
             Option= Option.toUpperCase();//pass the input to uppercase to select an option
 
@@ -105,13 +108,6 @@ public class Main {
                     }
                 break;
 
-                case "S":
-                    for (Tarea taskinfo :ListTask ) {
-                        System.out.println("-id: "+taskinfo.getId() +" -title: "+taskinfo.getTitle()
-                        +" -description: "+ taskinfo.getDescription());
-                    }
-                break;
-
                 case "D":
                     System.out.println("ingresa el id de la tarea que deseas eliminar\n");
                     id=scan.nextInt();//asking for the id to modified the task
@@ -123,6 +119,14 @@ public class Main {
                         System.out.println("tarea eliminasa exitosamente");
                     }
                 break;
+
+                case "Q":
+                System.out.println("Estas son todas las tareas añadidas por el usuario" + user.getUser()+"\n");
+                ShowtaskList();
+                break;
+
+                default:
+                System.out.println("La opción no es valida porfavor ingresa una opción valida");
             }
         }while(!Option.equals("Q"));
 
@@ -134,12 +138,21 @@ public class Main {
         System.out.println("Estas son tus posibles opciones a elegir"+"\n");
 
         System.out.println("presiona A para añadir una tarea "+"\n"+//addTask
-                           "presiona M para modificar una tarea "+"\n"+//modifiedTask
-                           "presiona S para mostrar la lista de tareas "+"\n"+//show the Tasklist 
+                           "presiona M para modificar una tarea "+"\n"+//modifiedTask 
                            "presiona D para eliminar una tarea "+"\n"+//deleteTask
                            "presiona Q para salir... "+"\n");//quit
-    
         System.out.println("-----------------------------------------------------");
+    }
+
+    public static void ShowtaskList(){
+         if(!ListTask.isEmpty()){//show the tasklist
+                for (Tarea taskinfo :ListTask ) {
+                                System.out.println("-id: "+taskinfo.getId() +" -title: "+taskinfo.getTitle()
+                                +" -description: "+ taskinfo.getDescription());
+                            }
+            }else{
+                System.out.println("Sin tareas asignadas\n");
+            }
     }
 
     
