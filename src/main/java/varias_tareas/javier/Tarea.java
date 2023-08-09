@@ -7,8 +7,9 @@ package varias_tareas.javier;
 import java.util.ArrayList;
 
 /**
- *
+ * 
  * @author schja
+ * @version 1.1
  */
 public class Tarea {
 
@@ -73,46 +74,41 @@ public class Tarea {
                 + " Descripcion: " + this.descripcion
                 + " Estado: " + this.realizada;
     }
+    
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        Tarea aComparar = (Tarea) obj;
-        return this.nombre.compareTo(aComparar.nombre) == 0;
-
-    }
-
-    public void agregarTareas(Tarea tarea, ArrayList tareas){ 
+    /**
+     * Metodo que permite agregar una tarea.
+     * @param tarea
+     * @param tareas
+     */
+    public void agregarTareas(Tarea tarea, ArrayList tareas) {
         tareas.add(tarea);
     }
 
-    public Tarea getTareaPorId(int id, ArrayList<Tarea> tareas) {
-        for (Tarea tarea : tareas) {
-            if (tarea.getId() == id) {
-                return tarea;
-            }
-        }
-        return null;
-
-    }
-    
-    public void eliminarTarea(int id, ArrayList<Tarea> tareas){
+    /**
+     * Metodo que permite eliminar una tarea.
+     * @param id 
+     * @param tareas
+     */
+    public void eliminarTarea(int id, ArrayList<Tarea> tareas) {
         int indiceTarea = id - 1;
         tareas.remove(indiceTarea);
-    
+
     }
 
+    /**
+     * Metodo que permite modificar una tarea.
+     * @param tareas
+     * @param tarea
+     */
     public void modificarTarea(ArrayList<Tarea> tareas, Tarea tarea) {
-                
+
         for (Tarea tar : tareas) {
             if (tar.getId() == tarea.getId()) {
                 tar.setDescripcion(tarea.getDescripcion());
-                
-            }       
+
+            }
         }
     }
-    
+
 }

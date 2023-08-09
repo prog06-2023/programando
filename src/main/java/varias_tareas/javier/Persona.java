@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  *
  * @author schja
+ * @version 1.1
  */
 public class Persona {
 
