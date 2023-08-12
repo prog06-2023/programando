@@ -51,7 +51,7 @@ public class Tarea {
         this.descripcion = descripcion;
     }
 
-    public String isRealizada() {
+    public String getRealizada() {
         return realizada;
     }
 
@@ -105,8 +105,9 @@ public class Tarea {
 
         for (Tarea tar : tareas) {
             if (tar.getId() == tarea.getId()) {
+                tar.setNombre(tarea.getNombre());
                 tar.setDescripcion(tarea.getDescripcion());
-
+                tar.setRealizada(tarea.getRealizada());
             }
         }
     }
